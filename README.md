@@ -1,101 +1,3 @@
-# pulumi-cloud-infrastructure
-Infrastructure as Code using Pulumi with Python/TypeScript
-
-
-```
-pulumi-cloud-infrastructure/
-├── .github/
-│   └── workflows/
-│       ├── pulumi-preview.yml
-│       ├── pulumi-deploy.yml
-│       └── security-scan.yml
-├── aws/
-│   ├── __main__.py
-│   ├── requirements.txt
-│   ├── Pulumi.yaml
-│   ├── Pulumi.dev.yaml
-│   ├── Pulumi.staging.yaml
-│   └── Pulumi.production.yaml
-├── azure/
-│   ├── index.ts
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── Pulumi.yaml
-│   ├── Pulumi.dev.yaml
-│   ├── Pulumi.staging.yaml
-│   └── Pulumi.production.yaml
-├── gcp/
-│   ├── __main__.py
-│   ├── requirements.txt
-│   ├── Pulumi.yaml
-│   ├── Pulumi.dev.yaml
-│   ├── Pulumi.staging.yaml
-│   └── Pulumi.production.yaml
-├── multi-cloud/
-│   ├── __main__.py
-│   ├── requirements.txt
-│   ├── Pulumi.yaml
-│   ├── Pulumi.dev.yaml
-│   ├── Pulumi.staging.yaml
-│   └── Pulumi.production.yaml
-├── kubernetes/
-│   ├── index.ts
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── Pulumi.yaml
-│   ├── Pulumi.dev.yaml
-│   ├── Pulumi.staging.yaml
-│   └── Pulumi.production.yaml
-├── modules/
-│   ├── aws/
-│   │   ├── vpc/
-│   │   │   ├── __init__.py
-│   │   │   └── vpc.py
-│   │   ├── eks/
-│   │   │   ├── __init__.py
-│   │   │   └── cluster.py
-│   │   └── rds/
-│   │       ├── __init__.py
-│   │       └── database.py
-│   ├── azure/
-│   │   ├── aks/
-│   │   │   ├── index.ts
-│   │   │   └── cluster.ts
-│   │   └── storage/
-│   │       ├── index.ts
-│   │       └── account.ts
-│   └── gcp/
-│       ├── gke/
-│       │   ├── __init__.py
-│       │   └── cluster.py
-│       └── cloud-sql/
-│           ├── __init__.py
-│           └── database.py
-├── scripts/
-│   ├── setup-pulumi.sh
-│   ├── deploy-stack.sh
-│   ├── destroy-stack.sh
-│   └── export-state.sh
-├── tests/
-│   ├── test_aws_infrastructure.py
-│   ├── test_azure_infrastructure.py
-│   └── test_gcp_infrastructure.py
-├── docs/
-│   ├── aws-setup.md
-│   ├── azure-setup.md
-│   ├── gcp-setup.md
-│   └── multi-cloud.md
-├── .pulumi/
-│   └── templates/
-├── .gitignore
-├── LICENSE
-├── README.md
-├── CONTRIBUTING.md
-└── pulumi-plugin.json
-```
-
-
-
 # Pulumi Cloud Infrastructure
 
 ![Pulumi](https://img.shields.io/badge/Pulumi-Infrastructure%20as%20Code-blue)
@@ -167,7 +69,8 @@ A comprehensive Infrastructure as Code (IaC) repository using Pulumi with Python
 git clone https://github.com/your-username/pulumi-cloud-infrastructure.git
 cd pulumi-cloud-infrastructure
 ```
-2. Setup Environment
+
+### 2. Setup Environment
 
 ```bash
 # Install Pulumi and dependencies
@@ -182,7 +85,7 @@ az login
 gcloud auth login
 ```
 
-3. Deploy AWS Infrastructure
+### 3. Deploy AWS Infrastructure
 
 ```bash
 cd aws
@@ -191,7 +94,7 @@ pulumi config set aws:region us-west-2
 pulumi up
 ```
 
-4. Deploy Azure Infrastructure
+### 4. Deploy Azure Infrastructure
 
 ```bash
 cd azure
@@ -201,7 +104,7 @@ npm install
 pulumi up
 ```
 
-5. Deploy Multi-Cloud Application
+### 5. Deploy Multi-Cloud Application
 
 ```bash
 cd multi-cloud
@@ -209,71 +112,174 @@ pulumi stack init dev
 pulumi up
 ```
 
-📁 Project Structure
+## 📁 Project Structure
+
+### Simple Structure
 
 ```text
 pulumi-cloud-infrastructure/
-├── aws/                 # AWS infrastructure (Python)
+├── aws/                # AWS infrastructure (Python)
 ├── azure/              # Azure infrastructure (TypeScript)
 ├── gcp/                # GCP infrastructure (Python)
 ├── multi-cloud/        # Cross-cloud deployments
 ├── kubernetes/         # K8s manifests and operators
-├── modules/           # Reusable cloud components
-├── scripts/           # Deployment and utility scripts
-├── tests/             # Infrastructure tests
-└── docs/              # Documentation
+├── modules/            # Reusable cloud components
+├── scripts/            # Deployment and utility scripts
+├── tests/              # Infrastructure tests
+└── docs/               # Documentation
 ```
 
-🛠️ Cloud Providers
+### Entire Structure
 
-AWS (Python)
+```
+pulumi-cloud-infrastructure/
+├── .github/
+│   └── workflows/
+│       ├── pulumi-preview.yml
+│       ├── pulumi-deploy.yml
+│       └── security-scan.yml
+├── aws/                                # AWS infrastructure (Python)
+│   ├── __main__.py
+│   ├── requirements.txt
+│   ├── Pulumi.yaml
+│   ├── Pulumi.dev.yaml
+│   ├── Pulumi.staging.yaml
+│   └── Pulumi.production.yaml
+├── azure/                              # Azure infrastructure (TypeScript)
+│   ├── index.ts
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── Pulumi.yaml
+│   ├── Pulumi.dev.yaml
+│   ├── Pulumi.staging.yaml
+│   └── Pulumi.production.yaml
+├── gcp/                                # GCP infrastructure (Python)
+│   ├── __main__.py
+│   ├── requirements.txt
+│   ├── Pulumi.yaml
+│   ├── Pulumi.dev.yaml
+│   ├── Pulumi.staging.yaml
+│   └── Pulumi.production.yaml
+├── multi-cloud/                        # Cross-cloud deployments
+│   ├── __main__.py
+│   ├── requirements.txt
+│   ├── Pulumi.yaml
+│   ├── Pulumi.dev.yaml
+│   ├── Pulumi.staging.yaml
+│   └── Pulumi.production.yaml
+├── kubernetes/                         # K8s manifests and operators
+│   ├── index.ts
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── Pulumi.yaml
+│   ├── Pulumi.dev.yaml
+│   ├── Pulumi.staging.yaml
+│   └── Pulumi.production.yaml
+├── modules/                            # Reusable cloud components
+│   ├── aws/
+│   │   ├── vpc/
+│   │   │   ├── __init__.py
+│   │   │   └── vpc.py
+│   │   ├── eks/
+│   │   │   ├── __init__.py
+│   │   │   └── cluster.py
+│   │   └── rds/
+│   │       ├── __init__.py
+│   │       └── database.py
+│   ├── azure/
+│   │   ├── aks/
+│   │   │   ├── index.ts
+│   │   │   └── cluster.ts
+│   │   └── storage/
+│   │       ├── index.ts
+│   │       └── account.ts
+│   └── gcp/
+│       ├── gke/
+│       │   ├── __init__.py
+│       │   └── cluster.py
+│       └── cloud-sql/
+│           ├── __init__.py
+│           └── database.py
+├── scripts/                              # Deployment and utility scripts
+│   ├── setup-pulumi.sh
+│   ├── deploy-stack.sh
+│   ├── destroy-stack.sh
+│   └── export-state.sh
+├── tests/                                # Infrastructure tests
+│   ├── test_aws_infrastructure.py
+│   ├── test_azure_infrastructure.py
+│   └── test_gcp_infrastructure.py
+├── docs/                                 # Documentation
+│   ├── aws-setup.md
+│   ├── azure-setup.md
+│   ├── gcp-setup.md
+│   └── multi-cloud.md
+├── .pulumi/
+│   └── templates/
+├── .gitignore
+├── LICENSE
+├── README.md
+├── CONTRIBUTING.md
+└── pulumi-plugin.json
+```
 
-VPC with public and private subnets
+## 🛠️ Cloud Providers
 
-EKS Kubernetes clusters
+### AWS (Python)
 
-RDS PostgreSQL databases
+* VPC with public and private subnets
 
-S3 buckets for storage
+* EKS Kubernetes clusters
 
-ALB for load balancing
+* RDS PostgreSQL databases
 
-CloudWatch for monitoring
+* S3 buckets for storage
 
-Azure (TypeScript)
-Virtual Network with subnets
+* ALB for load balancing
 
-AKS Kubernetes clusters
+* CloudWatch for monitoring
 
-PostgreSQL flexible servers
+### Azure (TypeScript)
 
-Storage Accounts and Blob containers
+* Virtual Network with subnets
 
-Application Gateway for load balancing
+* AKS Kubernetes clusters
 
-Monitor for observability
+* PostgreSQL flexible servers
 
-GCP (Python)
-VPC networks with subnets
+* Storage Accounts and Blob containers
 
-GKE Kubernetes clusters
+* Application Gateway for load balancing
 
-Cloud SQL PostgreSQL instances
+* Monitor for observability
 
-Cloud Storage buckets
+### GCP (Python)
 
-Load Balancers with managed certificates
+* VPC networks with subnets
 
-Stackdriver monitoring
+* GKE Kubernetes clusters
 
-🔧 Modules
-Reusable Components
-Module	Description	Cloud Providers
-vpc	Virtual network with subnets	AWS, Azure, GCP
-eks/aks/gke	Managed Kubernetes clusters	AWS, Azure, GCP
-rds/postgresql/cloud-sql	Managed databases	AWS, Azure, GCP
-s3/storage/cloud-storage	Object storage	AWS, Azure, GCP
-Using Modules
+* Cloud SQL PostgreSQL instances
+
+* Cloud Storage buckets
+
+* Load Balancers with managed certificates
+
+* Stackdriver monitoring
+
+## 🔧 Modules
+
+### Reusable Components
+
+| Module	                    | Description	                  | Cloud Providers |
+|-----------------------------|-------------------------------|-----------------|
+| vpc	                        | Virtual network with subnets	| AWS, Azure, GCP |
+| eks/aks/gke	                | Managed Kubernetes clusters	  | AWS, Azure, GCP |
+| rds/postgresql/cloud-sql	  | Managed databases	            | AWS, Azure, GCP |
+| s3/storage/cloud-storage	  | Object storage	              | AWS, Azure, GCP |
+---
+
+### Using Modules
 
 ```python
 # AWS VPC module
@@ -284,7 +290,9 @@ vpc = Vpc(
     cidr_block="10.0.0.0/16",
     enable_nat_gateway=True
 )
-typescript
+```
+
+```typescript
 // Azure AKS module
 import { AksCluster } from "./modules/azure/aks";
 
@@ -294,9 +302,9 @@ const cluster = new AksCluster("main-cluster", {
 });
 ```
 
-🚀 Deployment
+## 🚀 Deployment
 
-Environment-Based Stacks
+### Environment-Based Stacks
 
 ```bash
 # Development
@@ -310,8 +318,11 @@ pulumi up
 # Production
 pulumi stack select production
 pulumi up
-Using Deployment Scripts
-bash
+```
+
+### Using Deployment Scripts
+
+```bash
 # Deploy specific stack
 ./scripts/deploy-stack.sh aws dev
 
@@ -322,21 +333,21 @@ bash
 ./scripts/export-state.sh gcp production
 ```
 
-🔒 Security
+## 🔒 Security
 
-Built-in Security Features
+### Built-in Security Features
 
-Network Security - Security groups and NSGs
+* Network Security - Security groups and NSGs
 
-IAM/RBAC - Least privilege access control
+* IAM/RBAC - Least privilege access control
 
-Encryption - Data encryption at rest and in transit
+* Encryption - Data encryption at rest and in transit
 
-Secrets Management - Pulumi config and cloud secrets
+* Secrets Management - Pulumi config and cloud secrets
 
-Compliance - CIS benchmarks and security best practices
+* Compliance - CIS benchmarks and security best practices
 
-Security Configuration
+### Security Configuration
 
 ```bash
 # Set secrets
@@ -347,17 +358,19 @@ pulumi config set --secret aws:accessKey "AKIA..."
 pulumi config set --secret aws:secretKey "secret-key"
 ```
 
-📊 Monitoring & Observability
-Integrated Monitoring
-AWS: CloudWatch alarms and dashboards
+## 📊 Monitoring & Observability
 
-Azure: Monitor alerts and insights
+### Integrated Monitoring
 
-GCP: Stackdriver monitoring and logging
+* AWS: CloudWatch alarms and dashboards
 
-Kubernetes: Prometheus and Grafana
+* Azure: Monitor alerts and insights
 
-Example Monitoring Setup
+* GCP: Stackdriver monitoring and logging
+
+* Kubernetes: Prometheus and Grafana
+
+### Example Monitoring Setup
 
 ```python
 # CloudWatch alarms
@@ -369,8 +382,10 @@ cloudwatch.MetricAlarm("high-cpu",
 )
 ```
 
-💰 Cost Optimization
-Cost Estimation
+## 💰 Cost Optimization
+
+### Cost Estimation
+
 ```bash
 # Preview costs before deployment
 pulumi preview --diff
@@ -379,17 +394,20 @@ pulumi preview --diff
 pulumi stack output costs
 ```
 
-Cost Optimization Strategies
-Right-sizing resources
+### Cost Optimization Strategies
 
-Auto-scaling configurations
+* Right-sizing resources
 
-Spot instances for workloads
+* Auto-scaling configurations
 
-Storage lifecycle policies
+* Spot instances for workloads
 
-🧪 Testing
-Infrastructure Tests
+* Storage lifecycle policies
+
+## 🧪 Testing
+
+### Infrastructure Tests
+
 ```bash
 # Run AWS tests
 python -m pytest tests/test_aws_infrastructure.py
@@ -401,7 +419,7 @@ npm test -- tests/test_azure_infrastructure.ts
 pulumi preview --diff
 ```
 
-Test Examples
+### Test Examples
 
 ```python
 def test_vpc_creation():
@@ -411,18 +429,19 @@ def test_vpc_creation():
     assert vpc.enable_dns_hostnames == True
 ```
 
-🔄 CI/CD Pipeline
+## 🔄 CI/CD Pipeline
 
-GitHub Actions
-Preview Changes - Plan and validate infrastructure
+### GitHub Actions
 
-Automated Deployment - Deploy to environments
+* Preview Changes - Plan and validate infrastructure
 
-Security Scanning - Check for vulnerabilities
+* Automated Deployment - Deploy to environments
 
-Testing - Run infrastructure tests
+* Security Scanning - Check for vulnerabilities
 
-Workflow Example
+* Testing - Run infrastructure tests
+
+### Workflow Example
 
 ```yaml
 name: Deploy AWS Infrastructure
@@ -440,32 +459,36 @@ jobs:
           stack-name: aws-dev
 ```
 
-🤝 Contributing
-Fork the repository
+## 🤝 Contributing
 
-Create a feature branch (git checkout -b feature/amazing-feature)
+1. Fork the repository
 
-Commit your changes (git commit -m 'Add amazing feature')
+2. Create a feature branch (git checkout -b feature/amazing-feature)
 
-Push to the branch (git push origin feature/amazing-feature)
+3. Commit your changes (git commit -m 'Add amazing feature')
 
-Open a Pull Request
+4. Push to the branch (git push origin feature/amazing-feature)
+
+5. Open a Pull Request
 
 Please read CONTRIBUTING.md for details.
 
-📄 License
+## 📄 License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-🙏 Acknowledgments
-Pulumi Team for excellent IaC tooling
+## 🙏 Acknowledgments
 
-Cloud Providers for comprehensive APIs
+* Pulumi Team for excellent IaC tooling
 
-Open Source Community for best practices
+* Cloud Providers for comprehensive APIs
 
-📞 Support
-Issues: GitHub Issues
+* Open Source Community for best practices
 
-Discussions: GitHub Discussions
+## 📞 Support
 
-Documentation: AWS, Azure, GCP
+* Issues: GitHub Issues
+
+* Discussions: GitHub Discussions
+
+* Documentation: AWS, Azure, GCP
