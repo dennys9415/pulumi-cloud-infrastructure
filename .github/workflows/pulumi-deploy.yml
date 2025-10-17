@@ -1,0 +1,126 @@
+name: Pulumi Deploy
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+
+env:
+  PULUMI_VERSION: "3.0.0"
+  NODE_VERSION: "18"
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  deploy-aws:
+    name: Deploy AWS Infrastructure
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Pulumi
+      uses: pulumi/setup-pulumi@v4
+      with:
+        version: ${{ env.PULUMI_VERSION }}
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
+
+    - name: Install Python Dependencies
+      run: |
+        cd aws
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Deploy AWS Infrastructure
+      run: |
+        cd aws
+        pulumi stack select production || pulumi stack init production
+        pulumi config set aws:region us-west-2
+        pulumi up --yes
+
+  deploy-azure:
+    name: Deploy Azure Infrastructure
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Pulumi
+      uses: pulumi/setup-pulumi@v4
+      with:
+        version: ${{ env.PULUMI_VERSION }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Configure Azure Credentials
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Install Node.js Dependencies
+      run: |
+        cd azure
+        npm ci
+
+    - name: Deploy Azure Infrastructure
+      run: |
+        cd azure
+        pulumi stack select production || pulumi stack init production
+        pulumi config set azure-native:location EastUS
+        pulumi up --yes
+
+  deploy-gcp:
+    name: Deploy GCP Infrastructure
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Pulumi
+      uses: pulumi/setup-pulumi@v4
+      with:
+        version: ${{ env.PULUMI_VERSION }}
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Configure GCP Credentials
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+    - name: Install Python Dependencies
+      run: |
+        cd gcp
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Deploy GCP Infrastructure
+      run: |
+        cd gcp
+        pulumi stack select production || pulumi stack init production
+        pulumi config set gcp:project ${{ secrets.GCP_PROJECT }}
+        pulumi config set gcp:region us-central1
+        pulumi up --yes

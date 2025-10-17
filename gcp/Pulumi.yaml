@@ -1,0 +1,33 @@
+name: gcp-infrastructure
+runtime: python
+description: GCP infrastructure using Pulumi with Python
+
+template:
+  config:
+    gcp:project:
+      type: string
+      description: GCP project ID
+    gcp:region:
+      type: string
+      description: GCP region
+      default: us-central1
+    minNodes:
+      type: integer
+      description: Minimum number of GKE nodes
+      default: 1
+    maxNodes:
+      type: integer
+      description: Maximum number of GKE nodes
+      default: 3
+    machineType:
+      type: string
+      description: GKE node machine type
+      default: e2-medium
+    dbTier:
+      type: string
+      description: Cloud SQL instance tier
+      default: db-f1-micro
+    diskSize:
+      type: integer
+      description: Cloud SQL disk size in GB
+      default: 20

@@ -1,0 +1,121 @@
+name: Pulumi Preview
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+
+env:
+  PULUMI_VERSION: "3.0.0"
+  NODE_VERSION: "18"
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  preview-aws:
+    name: Preview AWS Infrastructure
+    runs-on: ubuntu-latest
+    environment: preview
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Pulumi
+      uses: pulumi/setup-pulumi@v4
+      with:
+        version: ${{ env.PULUMI_VERSION }}
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
+
+    - name: Install Python Dependencies
+      run: |
+        cd aws
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Preview AWS Infrastructure
+      run: |
+        cd aws
+        pulumi stack select dev || pulumi stack init dev
+        pulumi preview --diff
+
+  preview-azure:
+    name: Preview Azure Infrastructure
+    runs-on: ubuntu-latest
+    environment: preview
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Pulumi
+      uses: pulumi/setup-pulumi@v4
+      with:
+        version: ${{ env.PULUMI_VERSION }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Configure Azure Credentials
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Install Node.js Dependencies
+      run: |
+        cd azure
+        npm ci
+
+    - name: Preview Azure Infrastructure
+      run: |
+        cd azure
+        pulumi stack select dev || pulumi stack init dev
+        pulumi preview --diff
+
+  preview-gcp:
+    name: Preview GCP Infrastructure
+    runs-on: ubuntu-latest
+    environment: preview
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Pulumi
+      uses: pulumi/setup-pulumi@v4
+      with:
+        version: ${{ env.PULUMI_VERSION }}
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Configure GCP Credentials
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+    - name: Install Python Dependencies
+      run: |
+        cd gcp
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Preview GCP Infrastructure
+      run: |
+        cd gcp
+        pulumi stack select dev || pulumi stack init dev
+        pulumi preview --diff

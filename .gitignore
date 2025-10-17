@@ -1,0 +1,64 @@
+# Pulumi
+Pulumi.*.yaml
+!Pulumi.yaml
+!Pulumi.*.example.yaml
+.pulumi/
+**/node_modules/
+**/package-lock.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+.venv*/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+
+# TypeScript
+*.tsbuildinfo
+bin/
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Logs
+*.log
+logs/
+
+# Backups
+backups/
+*.backup
+
+# Sensitive files
+*.key
+*.pem
+*.crt
+*.cert
+*.env
+.env.local

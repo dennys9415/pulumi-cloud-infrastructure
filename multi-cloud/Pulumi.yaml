@@ -1,0 +1,17 @@
+name: multi-cloud-infrastructure
+runtime: python
+description: Multi-cloud infrastructure using Pulumi with Python
+
+template:
+  config:
+    gcp:project:
+      type: string
+      description: GCP project ID
+    aws:region:
+      type: string
+      description: AWS region
+      default: us-west-2
+    gcp:region:
+      type: string
+      description: GCP region
+      default: us-central1

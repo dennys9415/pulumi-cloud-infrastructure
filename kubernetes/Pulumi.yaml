@@ -1,0 +1,16 @@
+name: kubernetes-infrastructure
+runtime: nodejs
+description: Kubernetes infrastructure using Pulumi with TypeScript
+
+template:
+  config:
+    cloudProvider:
+      type: string
+      description: Cloud provider (aws, azure, gcp)
+    acmeEmail:
+      type: string
+      description: Email for Let's Encrypt certificates
+    grafanaPassword:
+      type: string
+      description: Grafana admin password
+      secret: true

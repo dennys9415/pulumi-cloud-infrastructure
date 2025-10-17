@@ -1,0 +1,30 @@
+{
+  "name": "pulumi-cloud-infrastructure",
+  "description": "Multi-cloud infrastructure as code using Pulumi with Python and TypeScript",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/pulumi-cloud-infrastructure"
+  },
+  "keywords": [
+    "pulumi",
+    "iac",
+    "aws",
+    "azure",
+    "gcp",
+    "kubernetes",
+    "multi-cloud",
+    "infrastructure",
+    "devops"
+  ],
+  "license": "MIT",
+  "authors": [
+    "Your Name <your.email@example.com>"
+  ],
+  "scripts": {
+    "setup": "./scripts/setup-pulumi.sh",
+    "deploy": "./scripts/deploy-stack.sh",
+    "destroy": "./scripts/destroy-stack.sh",
+    "export-state": "./scripts/export-state.sh"
+  }
+}

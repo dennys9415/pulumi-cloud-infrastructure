@@ -1,0 +1,30 @@
+name: aws-infrastructure
+runtime: python
+description: AWS infrastructure using Pulumi with Python
+
+template:
+  config:
+    aws:region:
+      type: string
+      description: AWS region to deploy resources
+      default: us-west-2
+    vpcCidrBlock:
+      type: string
+      description: CIDR block for VPC
+      default: 10.0.0.0/16
+    databaseInstanceClass:
+      type: string
+      description: RDS instance class
+      default: db.t3.micro
+    minNodes:
+      type: integer
+      description: Minimum number of EKS nodes
+      default: 1
+    maxNodes:
+      type: integer
+      description: Maximum number of EKS nodes
+      default: 3
+    allocatedStorage:
+      type: integer
+      description: RDS allocated storage in GB
+      default: 20
